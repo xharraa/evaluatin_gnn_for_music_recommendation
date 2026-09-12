@@ -1,0 +1,7 @@
+{
+  "playlist_size_median": 31.0,
+  "tracks_with_multiple_credits": 107357,
+  "artist_metadata_genre_coverage": 0.2547601580605899,
+  "tracks_without_playlist_history": 894224,
+  "interpretation": "Shared track credits form collaboration paths; same-name artists are never merged. Countries are used only from a sourced artist_countries.csv."
+}

@@ -1,0 +1,6 @@
+playlist_size_band_id,playlist_size_band,count,percentage
+0,under_5_not_eligible,816,4.244
+1,small_5_9,1078,5.607
+2,medium_10_24,6545,34.044
+3,large_25_99,7075,36.801
+4,very_large_100_plus,3711,19.303

@@ -1,0 +1,40 @@
+# Local Python environment
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Project-local runtimes and download cache
+.tools/
+.cache/
+
+# Large source and generated datasets
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Spark runtime files
+spark-warehouse/
+metastore_db/
+derby.log
+hs_err_pid*
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+models/lightgcn_playlist_recommender.pt
+models/*_playlist_recommender.pt
+models/*.npy
+models/track_catalog.csv.gz
+models/*.tmp
+models/*_training_resume.pt
+reports/test-temp*/
+.pytest_cache/
+reports/current/*.log
+
+models/*.parquet
+models/*.npz
+reports/current/demo_processes.json

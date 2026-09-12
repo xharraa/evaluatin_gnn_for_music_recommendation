@@ -1,0 +1,5 @@
+metric,value,unit
+Track-degree Gini,0.4988144812776988,0-1
+Edges held by top 1%,15.631431691472034,%
+Edges held by top 5%,34.42209559573382,%
+Edges held by top 10%,46.0896779677392,%

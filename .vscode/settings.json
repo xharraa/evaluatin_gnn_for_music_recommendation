@@ -1,0 +1,3 @@
+{
+  "python.defaultInterpreterPath": "${env:USERPROFILE}/.venvs/music/Scripts/python.exe"
+}

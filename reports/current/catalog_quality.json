@@ -1,0 +1,22 @@
+{
+  "source_tracks": 586672,
+  "clean_tracks": 586672,
+  "artist_metadata_rows": 1162095,
+  "track_artist_edges": 757170,
+  "tracks_with_multiple_artists": 106916,
+  "invalid_audio_values_preserved_as_missing": {
+    "danceability": 0,
+    "energy": 0,
+    "loudness": 0,
+    "speechiness": 0,
+    "acousticness": 0,
+    "instrumentalness": 0,
+    "liveness": 0,
+    "valence": 0,
+    "tempo": 328,
+    "duration_ms": 0,
+    "key": 0,
+    "mode": 0
+  },
+  "country_column_in_source": false
+}

@@ -1,0 +1,15 @@
+area,check,affected_rows
+playlist,missing_id,0
+playlist,missing_title,1
+playlist,invalid_source_duration,1
+track,missing_spud_track_id,0
+track,invalid_spotify_track_id,0
+track,invalid_spotify_artist_id,0
+track,missing_track_title,0
+track,invalid_duration,11
+track,invalid_popularity,0
+structural,duplicate_playlist_ids,0
+structural,duplicate_spotify_track_ids,0
+structural,duplicate_edges,0
+structural,orphan_playlist_edges,0
+structural,orphan_track_edges,0

@@ -1,0 +1,15 @@
+{
+  "python": "3.13.0 (tags/v3.13.0:60403a5, Oct  7 2024, 09:38:07) [MSC v.1941 64 bit (AMD64)]",
+  "python_executable": "C:\\Users\\artix\\.venvs\\music\\Scripts\\python.exe",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu_logical_cores": 12,
+  "ram_gib": 7.37,
+  "available_ram_gib": 0.99,
+  "free_disk_gib": 10.84,
+  "torch_version": "2.13.0+cpu",
+  "cuda_available": false,
+  "torch_cuda_runtime": null,
+  "default_device": "cpu",
+  "worker_threads": 4,
+  "nvidia_gpu": "GeForce GTX 1650, 4096 MiB, 457.49"
+}

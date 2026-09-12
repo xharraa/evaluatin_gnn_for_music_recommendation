@@ -1,0 +1,109 @@
+node_type,vector_column,feature_index,feature_name,included_in_safe_variant,modeling_note
+artist,features_with_popularity_context,0,z_log_artist_followers,True,safe input
+artist,features_with_popularity_context,1,z_genre_count,True,safe input
+artist,features_with_popularity_context,2,artist_metadata_found,True,safe input
+artist,features_with_popularity_context,3,followers_missing,True,safe input
+artist,features_with_popularity_context,4,genres_missing,True,safe input
+artist,features_with_popularity_context,5,genre_hash_00,True,safe input
+artist,features_with_popularity_context,6,genre_hash_01,True,safe input
+artist,features_with_popularity_context,7,genre_hash_02,True,safe input
+artist,features_with_popularity_context,8,genre_hash_03,True,safe input
+artist,features_with_popularity_context,9,genre_hash_04,True,safe input
+artist,features_with_popularity_context,10,genre_hash_05,True,safe input
+artist,features_with_popularity_context,11,genre_hash_06,True,safe input
+artist,features_with_popularity_context,12,genre_hash_07,True,safe input
+artist,features_with_popularity_context,13,genre_hash_08,True,safe input
+artist,features_with_popularity_context,14,genre_hash_09,True,safe input
+artist,features_with_popularity_context,15,genre_hash_10,True,safe input
+artist,features_with_popularity_context,16,genre_hash_11,True,safe input
+artist,features_with_popularity_context,17,genre_hash_12,True,safe input
+artist,features_with_popularity_context,18,genre_hash_13,True,safe input
+artist,features_with_popularity_context,19,genre_hash_14,True,safe input
+artist,features_with_popularity_context,20,genre_hash_15,True,safe input
+artist,features_with_popularity_context,21,genre_hash_16,True,safe input
+artist,features_with_popularity_context,22,genre_hash_17,True,safe input
+artist,features_with_popularity_context,23,genre_hash_18,True,safe input
+artist,features_with_popularity_context,24,genre_hash_19,True,safe input
+artist,features_with_popularity_context,25,genre_hash_20,True,safe input
+artist,features_with_popularity_context,26,genre_hash_21,True,safe input
+artist,features_with_popularity_context,27,genre_hash_22,True,safe input
+artist,features_with_popularity_context,28,genre_hash_23,True,safe input
+artist,features_with_popularity_context,29,genre_hash_24,True,safe input
+artist,features_with_popularity_context,30,genre_hash_25,True,safe input
+artist,features_with_popularity_context,31,genre_hash_26,True,safe input
+artist,features_with_popularity_context,32,genre_hash_27,True,safe input
+artist,features_with_popularity_context,33,genre_hash_28,True,safe input
+artist,features_with_popularity_context,34,genre_hash_29,True,safe input
+artist,features_with_popularity_context,35,genre_hash_30,True,safe input
+artist,features_with_popularity_context,36,genre_hash_31,True,safe input
+artist,features_with_popularity_context,37,genre_hash_32,True,safe input
+artist,features_with_popularity_context,38,genre_hash_33,True,safe input
+artist,features_with_popularity_context,39,genre_hash_34,True,safe input
+artist,features_with_popularity_context,40,genre_hash_35,True,safe input
+artist,features_with_popularity_context,41,genre_hash_36,True,safe input
+artist,features_with_popularity_context,42,genre_hash_37,True,safe input
+artist,features_with_popularity_context,43,genre_hash_38,True,safe input
+artist,features_with_popularity_context,44,genre_hash_39,True,safe input
+artist,features_with_popularity_context,45,genre_hash_40,True,safe input
+artist,features_with_popularity_context,46,genre_hash_41,True,safe input
+artist,features_with_popularity_context,47,genre_hash_42,True,safe input
+artist,features_with_popularity_context,48,genre_hash_43,True,safe input
+artist,features_with_popularity_context,49,genre_hash_44,True,safe input
+artist,features_with_popularity_context,50,genre_hash_45,True,safe input
+artist,features_with_popularity_context,51,genre_hash_46,True,safe input
+artist,features_with_popularity_context,52,genre_hash_47,True,safe input
+artist,features_with_popularity_context,53,genre_hash_48,True,safe input
+artist,features_with_popularity_context,54,genre_hash_49,True,safe input
+artist,features_with_popularity_context,55,genre_hash_50,True,safe input
+artist,features_with_popularity_context,56,genre_hash_51,True,safe input
+artist,features_with_popularity_context,57,genre_hash_52,True,safe input
+artist,features_with_popularity_context,58,genre_hash_53,True,safe input
+artist,features_with_popularity_context,59,genre_hash_54,True,safe input
+artist,features_with_popularity_context,60,genre_hash_55,True,safe input
+artist,features_with_popularity_context,61,genre_hash_56,True,safe input
+artist,features_with_popularity_context,62,genre_hash_57,True,safe input
+artist,features_with_popularity_context,63,genre_hash_58,True,safe input
+artist,features_with_popularity_context,64,genre_hash_59,True,safe input
+artist,features_with_popularity_context,65,genre_hash_60,True,safe input
+artist,features_with_popularity_context,66,genre_hash_61,True,safe input
+artist,features_with_popularity_context,67,genre_hash_62,True,safe input
+artist,features_with_popularity_context,68,genre_hash_63,True,safe input
+artist,features_with_popularity_context,69,z_artist_popularity_context,False,context only; test separately for target leakage
+artist,features_with_popularity_context,70,popularity_context_missing,False,context only; test separately for target leakage
+track,features,0,z_log_duration_ms,True,safe input; target popularity excluded
+track,features,1,z_danceability,True,safe input; target popularity excluded
+track,features,2,z_energy,True,safe input; target popularity excluded
+track,features,3,z_loudness,True,safe input; target popularity excluded
+track,features,4,z_speechiness,True,safe input; target popularity excluded
+track,features,5,z_acousticness,True,safe input; target popularity excluded
+track,features,6,z_instrumentalness,True,safe input; target popularity excluded
+track,features,7,z_liveness,True,safe input; target popularity excluded
+track,features,8,z_valence,True,safe input; target popularity excluded
+track,features,9,z_tempo,True,safe input; target popularity excluded
+track,features,10,z_release_year,False,release_year is retained for an explicit with/without-time comparison
+track,features,11,z_log_artist_count,True,safe input; target popularity excluded
+track,features,12,z_matched_artist_ratio,True,safe input; target popularity excluded
+track,features,13,explicit,True,safe input; target popularity excluded
+track,features,14,mode,True,safe input; target popularity excluded
+track,features,15,tempo_was_missing,True,safe input; target popularity excluded
+track,features,16,key_0,True,safe input; target popularity excluded
+track,features,17,key_1,True,safe input; target popularity excluded
+track,features,18,key_2,True,safe input; target popularity excluded
+track,features,19,key_3,True,safe input; target popularity excluded
+track,features,20,key_4,True,safe input; target popularity excluded
+track,features,21,key_5,True,safe input; target popularity excluded
+track,features,22,key_6,True,safe input; target popularity excluded
+track,features,23,key_7,True,safe input; target popularity excluded
+track,features,24,key_8,True,safe input; target popularity excluded
+track,features,25,key_9,True,safe input; target popularity excluded
+track,features,26,key_10,True,safe input; target popularity excluded
+track,features,27,key_11,True,safe input; target popularity excluded
+track,features,28,time_signature_0,True,safe input; target popularity excluded
+track,features,29,time_signature_1,True,safe input; target popularity excluded
+track,features,30,time_signature_2,True,safe input; target popularity excluded
+track,features,31,time_signature_3,True,safe input; target popularity excluded
+track,features,32,time_signature_4,True,safe input; target popularity excluded
+track,features,33,time_signature_5,True,safe input; target popularity excluded
+track,features,34,release_precision_year,True,safe input; target popularity excluded
+track,features,35,release_precision_month,True,safe input; target popularity excluded
+track,features,36,release_precision_day,True,safe input; target popularity excluded

@@ -1,0 +1,11 @@
+{
+  "connected_playlists": 18829,
+  "connected_tracks": 415120,
+  "connected_artists": 71655,
+  "playlist_track_edges": 1024711,
+  "track_artist_edges": 415120,
+  "tracks_with_catalog_audio": 11265,
+  "catalog_audio_coverage_percent": 2.713673154750434,
+  "artists_with_catalog_metadata": 18924,
+  "edge_order_available": false
+}

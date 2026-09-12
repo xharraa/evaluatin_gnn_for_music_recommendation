@@ -1,0 +1,23 @@
+{
+  "tracks": 1309344,
+  "artists": 1199540,
+  "playlists": 18829,
+  "metadata_nodes": 5366,
+  "total_nodes": 2533079,
+  "catalog_only_tracks": 575407,
+  "playlist_only_tracks": 403855,
+  "overlapping_tracks": 11265,
+  "track_artist_edges": 1480427,
+  "split_counts": {
+    "train": 734897,
+    "val": 144907,
+    "test": 144907
+  },
+  "countries_available": 0,
+  "elvana_gjata_artist_records": 1,
+  "artists_without_track_records": 1022778,
+  "elvana_gjata_tracks": 0,
+  "elvana_gjata_playlist_tracks": 0,
+  "graph_uses_only_train_playlist_edges": true,
+  "spud_only_tracks_without_playlist_history": 318817
+}

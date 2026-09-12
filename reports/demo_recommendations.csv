@@ -1,0 +1,11 @@
+rank,track_node_id,spotify_track_id,track_title,artist_name,spud_popularity,audio_features_available,match_percent,collaborative_similarity,audio_similarity,match_percent_definition,is_hidden_track_from_demo_playlist
+1,81626,0Vc2DrNAi0zpHw176EG3Xd,Ruoski minua!,Don Huonot,0.0,0,88.4,0.9921,,validation-calibrated relative fit score; not a liking probability,False
+2,84309,0X0za3KBSsxw4HWKaxvrXl,Likaiset Legendat I,Yö,0.0,0,88.4,0.9904,,validation-calibrated relative fit score; not a liking probability,False
+3,354189,5MTgEfDNxHmV8snelfUXFq,Andy McCoy,Juice Leskinen,0.0,0,88.4,0.9896,,validation-calibrated relative fit score; not a liking probability,False
+4,315327,4DOrtdOO2QH90wqTzP5CT3,Kotisaunan lauteilla,Mikko Alatalo,0.03,0,88.4,0.9893,,validation-calibrated relative fit score; not a liking probability,False
+5,38282,0BiUcBgPrmj0uL0rLNDk8m,Rakkauden haudalla,Juice Leskinen,0.22,0,88.4,0.9892,,validation-calibrated relative fit score; not a liking probability,False
+6,51067,0GxhZVG4Tj7prEP79ZcnPH,Suljettu sydän,Jonna Tervomaa,0.3,0,88.4,0.989,,validation-calibrated relative fit score; not a liking probability,False
+7,110438,0m3AZafcjzFYWHeWcnGPge,Surun Pyyhit Silmistäni,Kirka,0.0,0,88.3,0.9884,,validation-calibrated relative fit score; not a liking probability,False
+8,201045,1tHZIn4H10Gn3g2W22fIZg,Kaksin rannalla yksinäiset,Kirka,0.14,0,88.3,0.9881,,validation-calibrated relative fit score; not a liking probability,False
+9,354852,5NyKkLMowR2KDYpzVWY9HC,"Minä, Sinä Ja Mannerheim",Popeda,0.0,0,88.3,0.9877,,validation-calibrated relative fit score; not a liking probability,False
+10,140359,15jDX9Se9oehzxXtQ1mRF0,"Ei Oo, Ei Tuu",Lea Laven,0.29,0,88.3,0.9877,,validation-calibrated relative fit score; not a liking probability,False

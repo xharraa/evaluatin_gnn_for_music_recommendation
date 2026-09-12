@@ -1,0 +1,14 @@
+{
+  "unique_track_ids": true,
+  "unique_edges": true,
+  "valid_endpoints": true,
+  "finite_graph_features": true,
+  "disjoint_splits": true,
+  "full_catalog_retained": true,
+  "elvana_gjata_artist_records": 1,
+  "elvana_gjata_tracks": 0,
+  "elvana_gjata_playlist_tracks": 0,
+  "exposure_gini_including_catalog_only": 0.8411020079276328,
+  "country_metadata_rows": 0,
+  "cold_start_limitation": "Catalog-only tracks can be scored, but absent playlist ground truth cannot establish their recommendation quality. No playlist memberships are fabricated."
+}

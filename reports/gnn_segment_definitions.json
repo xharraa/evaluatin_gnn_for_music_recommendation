@@ -1,0 +1,37 @@
+{
+  "duration_band_ms": [
+    "under_120000",
+    "120000_to_239999",
+    "240000_to_359999",
+    "360000_plus"
+  ],
+  "tempo_band_bpm": [
+    "under_90",
+    "90_to_under_120",
+    "120_to_under_150",
+    "150_plus"
+  ],
+  "track_popularity_label": [
+    "0_to_24",
+    "25_to_49",
+    "50_to_74",
+    "75_to_100"
+  ],
+  "collaboration_artist_count": [
+    "1",
+    "2",
+    "3_to_4",
+    "5_plus"
+  ],
+  "artist_followers": [
+    "unknown",
+    "zero",
+    "1_to_999",
+    "1000_to_9999",
+    "10000_to_99999",
+    "100000_to_999999",
+    "1000000_plus"
+  ],
+  "genre_hash_dimension": 64,
+  "snapshot_year": 2021
+}

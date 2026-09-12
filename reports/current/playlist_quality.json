@@ -1,0 +1,10 @@
+{
+  "source_tracks": 737362,
+  "clean_unique_spotify_tracks": 737362,
+  "source_edges": 1024711,
+  "clean_edges": 1024711,
+  "removed_duplicate_or_invalid_edges": 0,
+  "playlists": 19225,
+  "duration_repairs": 11,
+  "evaluation_playlists": 18409
+}

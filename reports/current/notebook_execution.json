@@ -1,0 +1,37 @@
+[
+  {
+    "notebook": "00_environment_check.ipynb",
+    "status": "passed",
+    "seconds": 10.195331300143152
+  },
+  {
+    "notebook": "01_preprocessing.ipynb",
+    "status": "passed",
+    "seconds": 33.98384330002591
+  },
+  {
+    "notebook": "01b_playlist_preprocessing.ipynb",
+    "status": "passed",
+    "seconds": 11.10615159990266
+  },
+  {
+    "notebook": "02_joining_and_segmentation.ipynb",
+    "status": "passed",
+    "seconds": 88.75619890028611
+  },
+  {
+    "notebook": "02b_data_analysis.ipynb",
+    "status": "passed",
+    "seconds": 11.71878180000931
+  },
+  {
+    "notebook": "02c_further_data_analysis.ipynb",
+    "status": "passed",
+    "seconds": 16.997371300123632
+  },
+  {
+    "notebook": "03_model_creation.ipynb",
+    "status": "passed",
+    "seconds": 1285.459522
+  }
+]

@@ -1,0 +1,266 @@
+{
+  "artists": [
+    {
+      "position": 0,
+      "name": "artistid",
+      "type": "INTEGER",
+      "not_null": 1,
+      "default": null,
+      "primary_key": 1
+    },
+    {
+      "position": 1,
+      "name": "name",
+      "type": "TEXT",
+      "not_null": 1,
+      "default": null,
+      "primary_key": 0
+    },
+    {
+      "position": 2,
+      "name": "spotifyid",
+      "type": "TEXT",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    }
+  ],
+  "sqlite_sequence": [
+    {
+      "position": 0,
+      "name": "name",
+      "type": "",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    },
+    {
+      "position": 1,
+      "name": "seq",
+      "type": "",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    }
+  ],
+  "albums": [
+    {
+      "position": 0,
+      "name": "albumid",
+      "type": "INTEGER",
+      "not_null": 1,
+      "default": null,
+      "primary_key": 1
+    },
+    {
+      "position": 1,
+      "name": "name",
+      "type": "TEXT",
+      "not_null": 1,
+      "default": null,
+      "primary_key": 0
+    },
+    {
+      "position": 2,
+      "name": "artist",
+      "type": "INTEGER",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    },
+    {
+      "position": 3,
+      "name": "spotifyid",
+      "type": "TEXT",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    }
+  ],
+  "tracks": [
+    {
+      "position": 0,
+      "name": "trackid",
+      "type": "INTEGER",
+      "not_null": 1,
+      "default": null,
+      "primary_key": 1
+    },
+    {
+      "position": 1,
+      "name": "spotifyid",
+      "type": "TEXT",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    },
+    {
+      "position": 2,
+      "name": "title",
+      "type": "TEXT",
+      "not_null": 1,
+      "default": null,
+      "primary_key": 0
+    },
+    {
+      "position": 3,
+      "name": "artist",
+      "type": "INTEGER",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    },
+    {
+      "position": 4,
+      "name": "album",
+      "type": "INTEGER",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    },
+    {
+      "position": 5,
+      "name": "imgurl",
+      "type": "TEXT",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    },
+    {
+      "position": 6,
+      "name": "imgfile",
+      "type": "TEXT",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    },
+    {
+      "position": 7,
+      "name": "popularity",
+      "type": "REAL",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    },
+    {
+      "position": 8,
+      "name": "duration",
+      "type": "REAL",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    }
+  ],
+  "lastfmusers": [
+    {
+      "position": 0,
+      "name": "userid",
+      "type": "INTEGER",
+      "not_null": 1,
+      "default": null,
+      "primary_key": 1
+    },
+    {
+      "position": 1,
+      "name": "lastfmuserid",
+      "type": "TEXT",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    }
+  ],
+  "lastfmplaylists": [
+    {
+      "position": 0,
+      "name": "playlistid",
+      "type": "INTEGER",
+      "not_null": 1,
+      "default": null,
+      "primary_key": 1
+    },
+    {
+      "position": 1,
+      "name": "lastfmplaylistid",
+      "type": "TEXT",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    },
+    {
+      "position": 2,
+      "name": "user",
+      "type": "INTEGER",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    },
+    {
+      "position": 3,
+      "name": "title",
+      "type": "TEXT",
+      "not_null": 1,
+      "default": null,
+      "primary_key": 0
+    },
+    {
+      "position": 4,
+      "name": "url",
+      "type": "TEXT",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    },
+    {
+      "position": 5,
+      "name": "duration",
+      "type": "REAL",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 0
+    }
+  ],
+  "lastfmplayliststracks": [
+    {
+      "position": 0,
+      "name": "playlist",
+      "type": "INTEGER",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 1
+    },
+    {
+      "position": 1,
+      "name": "track",
+      "type": "INTEGER",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 2
+    }
+  ],
+  "lastfmtracklistens": [
+    {
+      "position": 0,
+      "name": "user",
+      "type": "INTEGER",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 1
+    },
+    {
+      "position": 1,
+      "name": "track",
+      "type": "INTEGER",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 2
+    },
+    {
+      "position": 2,
+      "name": "date",
+      "type": "DATETIME",
+      "not_null": 0,
+      "default": null,
+      "primary_key": 3
+    }
+  ]
+}

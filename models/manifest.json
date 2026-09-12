@@ -1,0 +1,100 @@
+{
+  "schema_version": 2,
+  "generation": "53719e7dee7702e3cd813171484b96196b447e5306d7fc42de9f86e73a23d268",
+  "config": {
+    "seed": 42,
+    "epochs": 10,
+    "batch_size": 2048,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "Adam",
+    "loss": "BPR",
+    "device": "cpu",
+    "max_eval_playlists": 1024,
+    "negatives_per_evaluation_playlist": 100,
+    "candidate_protocol": "all held-out positives plus up to 100 sampled non-positive playlist tracks; train seeds; same candidates for all models",
+    "graph": "train-only playlist-track plus all catalog track-artist, artist-genre, sourced artist-country edges",
+    "negative_pool": "playlist-observed tracks only; excludes every known positive for each playlist",
+    "score": "mean seed track embeddings; validation-selected metadata mixture"
+  },
+  "models": [
+    {
+      "id": "lightgcn",
+      "name": "LightGCN",
+      "file": "lightgcn_playlist_recommender.pt",
+      "architecture": {
+        "name": "LightGCN",
+        "hops": 2,
+        "hidden": 32,
+        "dim": 32,
+        "depth": 0
+      },
+      "metrics": {
+        "recall_at_10": 0.5708377835734414,
+        "ndcg_at_10": 0.6228682965186572,
+        "hit_rate_at_10": 0.8857421875,
+        "mrr_at_10": 0.7397197420634921,
+        "evaluated_playlists": 1024,
+        "recommended_unique_tracks": 9519,
+        "catalog_coverage_at_10": 0.007270052789793973,
+        "model": "lightgcn",
+        "best_epoch": 1,
+        "parameters": 2048,
+        "training_seconds": 266.5555031001568,
+        "metadata_weight": 0.6
+      }
+    },
+    {
+      "id": "sign",
+      "name": "SIGN",
+      "file": "sign_playlist_recommender.pt",
+      "architecture": {
+        "name": "SIGN",
+        "hops": 2,
+        "hidden": 128,
+        "dim": 64,
+        "depth": 2
+      },
+      "metrics": {
+        "recall_at_10": 0.583669672256421,
+        "ndcg_at_10": 0.642270342185567,
+        "hit_rate_at_10": 0.896484375,
+        "mrr_at_10": 0.7674979073660714,
+        "evaluated_playlists": 1024,
+        "recommended_unique_tracks": 9766,
+        "catalog_coverage_at_10": 0.007458696874159885,
+        "model": "sign",
+        "best_epoch": 1,
+        "parameters": 66176,
+        "training_seconds": 439.8210199996829,
+        "metadata_weight": 0.6
+      }
+    },
+    {
+      "id": "residual_sign",
+      "name": "Residual SIGN",
+      "file": "residual_sign_playlist_recommender.pt",
+      "architecture": {
+        "name": "Residual SIGN",
+        "hops": 4,
+        "hidden": 256,
+        "dim": 128,
+        "depth": 4
+      },
+      "metrics": {
+        "recall_at_10": 0.6068577727186947,
+        "ndcg_at_10": 0.6654573142530635,
+        "hit_rate_at_10": 0.908203125,
+        "mrr_at_10": 0.7874562096974206,
+        "evaluated_playlists": 1024,
+        "recommended_unique_tracks": 9835,
+        "catalog_coverage_at_10": 0.00751139501918518,
+        "model": "residual_sign",
+        "best_epoch": 1,
+        "parameters": 379136,
+        "training_seconds": 1179.1778303,
+        "metadata_weight": 0.6
+      }
+    }
+  ]
+}

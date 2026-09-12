@@ -1,0 +1,3 @@
+artist_metadata_available,node_count,mean_graph_degree,median_graph_degree,p90_graph_degree,metadata_status
+0,52731,3.4036714646033643,1,8,Catalog missing
+1,18924,12.451965757767914,4,32,Catalog available
