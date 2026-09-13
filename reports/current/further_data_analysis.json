@@ -1,0 +1,61 @@
+{
+  "catalog_track_count": 586672,
+  "connected_catalog_track_count": 11265,
+  "tracks_without_playlist_history": 894224,
+  "tracks_with_multiple_artist_credits": 107357,
+  "strongest_catalog_audio_pairs": [
+    {
+      "feature_a": "energy",
+      "feature_b": "loudness",
+      "pearson_r": 0.7647349853389
+    },
+    {
+      "feature_a": "energy",
+      "feature_b": "acousticness",
+      "pearson_r": -0.715411608089864
+    },
+    {
+      "feature_a": "danceability",
+      "feature_b": "valence",
+      "pearson_r": 0.5281498162795533
+    },
+    {
+      "feature_a": "loudness",
+      "feature_b": "acousticness",
+      "pearson_r": -0.5194232900554191
+    },
+    {
+      "feature_a": "energy",
+      "feature_b": "valence",
+      "pearson_r": 0.3722763076257456
+    }
+  ],
+  "playlist_degree_correlations_on_connected_catalog_tracks": [
+    {
+      "feature": "popularity",
+      "pearson_r": 0.3586912988031227,
+      "pairwise_n": 11265
+    },
+    {
+      "feature": "spud_popularity",
+      "pearson_r": 0.3418031429473596,
+      "pairwise_n": 11265
+    },
+    {
+      "feature": "acousticness",
+      "pearson_r": -0.10614332636263112,
+      "pairwise_n": 11265
+    },
+    {
+      "feature": "valence",
+      "pearson_r": -0.09680101968697362,
+      "pairwise_n": 11265
+    },
+    {
+      "feature": "danceability",
+      "pearson_r": -0.0807157844652322,
+      "pairwise_n": 11265
+    }
+  ],
+  "interpretation": "Audio relationships describe the catalog. Degree relationships use only catalog tracks observed in playlists. Artist credits form graph paths; correlations are associations, not causal effects or recommendation quality estimates."
+}

@@ -14,10 +14,7 @@
     "test": 144907
   },
   "countries_available": 0,
-  "elvana_gjata_artist_records": 1,
   "artists_without_track_records": 1022778,
-  "elvana_gjata_tracks": 0,
-  "elvana_gjata_playlist_tracks": 0,
   "graph_uses_only_train_playlist_edges": true,
   "spud_only_tracks_without_playlist_history": 318817
 }

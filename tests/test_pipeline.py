@@ -34,7 +34,7 @@ def music(tmp_path, monkeypatch):
         row = {
             "id": sid("T", i),
             "name": f"Song {i}",
-            "artists": repr(["Elvana Gjata"] if i >= 18 else [f"Artist {i%3}"]),
+            "artists": repr(["Artist 3"] if i >= 18 else [f"Artist {i%3}"]),
             "id_artists": repr([sid("A", 3)] if i >= 18 else [sid("A", i % 3)]),
             "popularity": 20,
         }
@@ -47,10 +47,8 @@ def music(tmp_path, monkeypatch):
         [
             {
                 "id": sid("A", i),
-                "name": "Elvana Gjata" if i == 3 else f"Artist {i}",
-                "genres": repr(
-                    [] if i == 5 else (["albanian pop"] if i == 3 else ["pop"])
-                ),
+                "name": f"Artist {i}",
+                "genres": repr([] if i == 5 else (["indie pop"] if i == 3 else ["pop"])),
                 "followers": 20,
                 "popularity": 20,
             }
@@ -139,7 +137,7 @@ def test_three_bundle_roundtrip_search_selection_and_http(music):
     manifest = training.run(epochs=1, batch_size=8, max_eval_playlists=3)
     assert [x["id"] for x in manifest["models"]] == list(training.SPECS)
     store = ModelStore(music)
-    results = store.search("ELVANA GJATA")
+    results = store.search("ARTIST 3")
     assert len(results) == 6 and not results.in_playlists.any()
     seed = str(results.iloc[0].spotify_track_id)
     for name in training.SPECS:

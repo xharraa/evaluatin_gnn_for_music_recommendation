@@ -43,10 +43,9 @@ Large model files and recovery checkpoints remain local and are excluded from Gi
 
 ## Data limitation retained
 
-Elvana Gjata has an artist profile and genre metadata but no credited songs in
-either supplied dataset. Her artist photo can load from Spotify, and she can be
-used as a recommendation inspiration. Artwork does not add missing songs or
-playlist memberships to the training data.
+Artist profiles without credited songs may still have genre metadata and can
+serve as recommendation inspirations. Artwork and metadata do not add missing
+songs or playlist memberships to the training data.
 
 ## Final verification
 

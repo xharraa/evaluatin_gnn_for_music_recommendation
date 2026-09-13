@@ -439,10 +439,6 @@ def integrate():
     assert relation[["track_node_id", "artist_node_id"]].notna().all().all()
     assert not split.duplicated(["playlist_node_id", "track_node_id"]).any()
     assert np.isfinite(features).all()
-    elvana = tracks.loc[
-        tracks.artist_name.str.contains("elvana gjata", case=False, regex=False)
-    ]
-    elvana.to_csv(REPORTS / "elvana_gjata_coverage.csv", index=False)
     return report(
         "graph_coverage",
         {
@@ -466,14 +462,7 @@ def integrate():
                 str(k): int(v) for k, v in split.split.value_counts().items()
             },
             "countries_available": int(artists.country.ne("").sum()),
-            "elvana_gjata_artist_records": int(
-                artists.artist_name.str.contains(
-                    "elvana gjata", case=False, regex=False
-                ).sum()
-            ),
             "artists_without_track_records": int(artists.track_count.eq(0).sum()),
-            "elvana_gjata_tracks": len(elvana),
-            "elvana_gjata_playlist_tracks": int(elvana.in_playlists.sum()),
             "graph_uses_only_train_playlist_edges": True,
         },
     )

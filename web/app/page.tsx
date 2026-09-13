@@ -338,7 +338,7 @@ export default function Home() {
                 value={query}
                 maxLength={200}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Try Elvana Gjata, Radiohead, Dreams…"
+                placeholder="Try Radiohead, Dreams, or an artist…"
                 aria-label="Search by track title or artist"
                 autoComplete="off"
               />

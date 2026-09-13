@@ -25,13 +25,13 @@
     "seconds": 11.71878180000931
   },
   {
-    "notebook": "02c_further_data_analysis.ipynb",
-    "status": "passed",
-    "seconds": 16.997371300123632
-  },
-  {
     "notebook": "03_model_creation.ipynb",
     "status": "passed",
     "seconds": 1285.459522
+  },
+  {
+    "notebook": "02c_further_data_analysis.ipynb",
+    "status": "passed",
+    "seconds": 19.967974300001515
   }
 ]

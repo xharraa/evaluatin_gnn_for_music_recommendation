@@ -1,10 +1,14 @@
 """Create clear, executable notebooks; keep original Spark work as an archive."""
 
 from pathlib import Path
+import argparse
 import json
 import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
+parser = argparse.ArgumentParser()
+parser.add_argument("--only", nargs="*", help="Notebook filenames to refresh; default is all")
+ONLY = parser.parse_args().only
 BOOT = """from pathlib import Path
 import sys
 ROOT = next(p for p in [Path.cwd(), *Path.cwd().parents] if (p / 'scripts/data_pipeline.py').exists())
@@ -31,6 +35,8 @@ def code(s):
 
 
 def notebook(name, title, cells):
+    if ONLY and name not in ONLY:
+        return
     path = ROOT / "notebooks" / name
     archive = ROOT / "notebooks/legacy" / name
     if path.exists() and not archive.exists() and name != "00_environment_check.ipynb":
@@ -142,16 +148,23 @@ notebook(
 )
 notebook(
     "02c_further_data_analysis.ipynb",
-    "# 02c · Missing playlist history and integrity\nExplicitly test the Elvana Gjata case, unique identities, valid graph endpoints, split disjointness and finite feature vectors.",
+    "# 02c · Further analysis of connected data\nRelate the catalog audio correlation matrix to observed playlist connections and artist-credit paths, then verify graph integrity.",
     [
         code(
-            "from scripts.project_analysis import diagnostics\nchecks = diagnostics()"
+            "from scripts.project_analysis import further_analysis\nrelationships = further_analysis()"
         ),
         code(
-            'elvana = pd.read_csv(REPORTS / "elvana_gjata_coverage.csv")\ndisplay(elvana[["spotify_track_id", "track_title", "artist_name", "in_catalog", "in_playlists"]])'
+            'display(pd.read_csv(REPORTS / "catalog_audio_relationships.csv").head(10).round(3))\ndisplay(pd.read_csv(REPORTS / "playlist_degree_relationships.csv").head(10).round(3))\ndisplay(Image(filename=str(REPORTS / "audio_correlations.png")))'
+        ),
+        code(
+            'audio = relationships["strongest_catalog_audio_pairs"]\ndegree = relationships["playlist_degree_correlations_on_connected_catalog_tracks"]\nprint(f"Strongest catalog audio pair: {audio[0][\'feature_a\']} and {audio[0][\'feature_b\']} (r={audio[0][\'pearson_r\']:.3f}).")\nprint(f"Among {relationships[\'connected_catalog_track_count\']:,} connected catalog tracks, the strongest playlist-degree relationship is {degree[0][\'feature\']} (r={degree[0][\'pearson_r\']:.3f}).")\nprint(f"The graph also contains {relationships[\'tracks_with_multiple_artist_credits\']:,} tracks with multiple artist credits and {relationships[\'tracks_without_playlist_history\']:,} tracks with no observed playlist history.")'
         ),
         md(
-            "Country is not inferred from an artist name or genre. Optional country metadata must be supplied as `data/raw/artist_countries.csv` with `spotify_artist_id,country,source`. Catalog-only artists can receive scores from metadata and graph paths, but absent playlist labels cannot prove their recommendation quality."
+            "The catalog matrix describes associations between audio features across catalog tracks. The playlist-degree table uses only catalog tracks connected to observed playlists, with pairwise sample sizes reported. Compare the direction and magnitude of these relationships, then examine coverage and multi-artist credits as graph paths. Correlation does not establish causation or model quality; missing playlist membership is missing observation, not negative preference."
+        ),
+        code("from scripts.project_analysis import diagnostics\nchecks = diagnostics()"),
+        md(
+            "The integrity checks verify identities, graph endpoints and finite propagated features. Artist credits and genre links connect tracks even when playlist history is absent; these paths support scoring but cannot prove recommendation quality without held-out playlist labels."
         ),
     ],
 )
@@ -170,9 +183,6 @@ notebook(
         ),
         code(
             'from scripts.project_analysis import training_figures\ndisplay(training_figures())\ndisplay(Image(filename=str(REPORTS / "model_comparison.png")))'
-        ),
-        code(
-            'from scripts.recommender_inference import load_default_recommender\nimport gc\nartists = pd.read_parquet(OUT / "artists.parquet")\nelvana = artists.loc[artists.artist_name.str.casefold().eq("elvana gjata")]\nif len(elvana):\n    artist_id = str(elvana.iloc[0].spotify_artist_id)\n    print("Artist metadata:")\n    display(elvana[["spotify_artist_id", "artist_name", "genres", "track_count"]])\n    for model_id in ["lightgcn", "sign", "residual_sign"]:\n        engine = load_default_recommender(ROOT, model_id)\n        recommendations, metadata = engine.recommend([], k=8, artist_ids=[artist_id])\n        print(model_id, metadata)\n        display(recommendations[["track_title", "artist_name", "match_percent", "in_playlists"]])\n        recommendations.to_csv(REPORTS / f"elvana_{model_id}_recommendations.csv", index=False)\n        del engine\n        gc.collect()\nelse:\n    print("Elvana Gjata is absent from the artist source.")\n'
         ),
         md(
             "The three `.pt` bundles and their measured scores are listed in `models/manifest.json`. Search uses the shared union catalog; switching models preserves the user playlist. `scripts/start_web_demo.ps1` starts the local API and web interface."

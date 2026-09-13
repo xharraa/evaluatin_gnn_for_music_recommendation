@@ -1,9 +1,0 @@
-spotify_track_id,track_title,artist_name,track_node_id,in_catalog,in_playlists,spud_popularity,audio_features_available,match_percent,rank,collaborative_similarity,audio_similarity,reason
-5CjMnoD0Po2lDNiqAbiLzb,Kur Fjalet Mungojne,Alban Skenderaj,987691,False,False,0.18,False,8.6,1,0.55666125,,"Connected to your artist inspiration by a genre, country or shared artist credit"
-17tbhTqnX3RzCOuFWrZj5s,Valeria,Elsa Lila,309242,False,True,0.05,False,7.3,2,0.51213914,,"Connected to your artist inspiration by a genre, country or shared artist credit"
-4KmkztVr4Ew91ffpqCUX8V,Nuk Bën Për Mua,G-Bani,865985,False,True,0.01,False,7.2,3,0.509498,,"Connected to your artist inspiration by a genre, country or shared artist credit"
-0kDPa3jNIb7Bv5js0skSNY,Feel the Passion,Aurela Gace,220588,False,True,0.13,False,6.8,4,0.4946411,,"Connected to your artist inspiration by a genre, country or shared artist credit"
-1UtOFjVtypMUaBRAjjJHeS,Thirje E Deshperuar,Alban Skenderaj,387898,False,True,0.16,False,5.8,5,0.4516803,,"Connected to your artist inspiration by a genre, country or shared artist credit"
-2atNuBfixd6UCRoJFpSOeF,Kush Te Ndau Prej Meje,Shpat Kasapi,593170,True,False,0.0,True,5.5,6,0.41426688,,"Connected to your artist inspiration by a genre, country or shared artist credit"
-7KZTvFqBB4GUA1nAMf9ZJ7,Valle Kosovare,Shpat Kasapi,1255206,True,False,0.0,True,4.9,7,0.38885626,,"Connected to your artist inspiration by a genre, country or shared artist credit"
-6IfPsaQFL3MTgYmjZQWRVP,Xhamadani Vija Vija,Iliret,1130332,True,False,0.0,True,4.4,8,0.47104055,,"Connected to your artist inspiration by a genre, country or shared artist credit"

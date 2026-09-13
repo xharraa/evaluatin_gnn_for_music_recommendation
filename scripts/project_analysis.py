@@ -124,6 +124,53 @@ def analysis():
     )
 
 
+def further_analysis():
+    """Relate catalog audio correlations to observed playlist connections."""
+    paths()
+    catalog_corr = pd.read_csv(REPORTS / "catalog_audio_correlations.csv", index_col=0)
+    audio_pairs = pd.DataFrame(
+        [
+            {"feature_a": left, "feature_b": right, "pearson_r": float(catalog_corr.loc[left, right])}
+            for i, left in enumerate(catalog_corr.columns)
+            for right in catalog_corr.columns[i + 1 :]
+        ]
+    )
+    audio_pairs = audio_pairs.reindex(audio_pairs.pearson_r.abs().sort_values(ascending=False).index)
+    audio_pairs.to_csv(REPORTS / "catalog_audio_relationships.csv", index=False)
+
+    tracks = pd.read_parquet(OUT / "tracks.parquet", columns=["spotify_track_id", "track_node_id", "in_catalog", "in_playlists", "spud_popularity"])
+    edges = pd.read_parquet(OUT / "split.parquet", columns=["track_node_id"])
+    degree = edges.groupby("track_node_id").size().rename("playlist_degree")
+    connected = tracks.loc[tracks.in_catalog & tracks.in_playlists].join(degree, on="track_node_id")
+    catalog = pd.read_parquet(OUT / "catalog_tracks.parquet", columns=["id", "popularity", *AUDIO])
+    connected = connected.merge(catalog, left_on="spotify_track_id", right_on="id", validate="one_to_one")
+    connected["log_playlist_degree"] = np.log1p(connected.playlist_degree)
+    columns = ["log_playlist_degree", "popularity", "spud_popularity", *AUDIO]
+    connected_corr = connected[columns].corr(method="pearson")
+    connected_corr.to_csv(REPORTS / "connected_track_correlation_matrix.csv")
+    degree_pairs = pd.DataFrame(
+        [
+            {"feature": name, "pearson_r": float(connected_corr.loc["log_playlist_degree", name]),
+             "pairwise_n": int(connected[["log_playlist_degree", name]].dropna().shape[0])}
+            for name in columns[1:]
+        ]
+    ).sort_values("pearson_r", key=lambda values: values.abs(), ascending=False)
+    degree_pairs.to_csv(REPORTS / "playlist_degree_relationships.csv", index=False)
+
+    relation = pd.read_parquet(OUT / "track_artist_edges.parquet", columns=["track_node_id"])
+    credits = relation.groupby("track_node_id").size()
+    summary = {
+        "catalog_track_count": int(tracks.in_catalog.sum()),
+        "connected_catalog_track_count": len(connected),
+        "tracks_without_playlist_history": int((~tracks.in_playlists).sum()),
+        "tracks_with_multiple_artist_credits": int((credits > 1).sum()),
+        "strongest_catalog_audio_pairs": audio_pairs.head(5).to_dict("records"),
+        "playlist_degree_correlations_on_connected_catalog_tracks": degree_pairs.head(5).to_dict("records"),
+        "interpretation": "Audio relationships describe the catalog. Degree relationships use only catalog tracks observed in playlists. Artist credits form graph paths; correlations are associations, not causal effects or recommendation quality estimates.",
+    }
+    return report("further_data_analysis", summary)
+
+
 def diagnostics():
     tracks = pd.read_parquet(OUT / "tracks.parquet")
     artists = pd.read_parquet(OUT / "artists.parquet")
@@ -139,10 +186,6 @@ def diagnostics():
         x = np.load(OUT / f"features_{i}.npy", mmap_mode="r")
         for start in range(0, len(x), 25000):
             assert np.isfinite(x[start : start + 25000]).all()
-    elvana = tracks.loc[
-        tracks.artist_name.str.contains("elvana gjata", case=False, regex=False)
-    ]
-    elvana.to_csv(REPORTS / "elvana_gjata_coverage.csv", index=False)
     degree = (
         edges.groupby("track_node_id")
         .size()
@@ -168,13 +211,6 @@ def diagnostics():
             "finite_graph_features": True,
             "disjoint_splits": True,
             "full_catalog_retained": True,
-            "elvana_gjata_artist_records": int(
-                artists.artist_name.str.contains(
-                    "elvana gjata", case=False, regex=False
-                ).sum()
-            ),
-            "elvana_gjata_tracks": len(elvana),
-            "elvana_gjata_playlist_tracks": int(elvana.in_playlists.sum()),
             "exposure_gini_including_catalog_only": gini,
             "country_metadata_rows": int(artists.country.ne("").sum()),
             "cold_start_limitation": "Catalog-only tracks can be scored, but absent playlist ground truth cannot establish their recommendation quality. No playlist memberships are fabricated.",

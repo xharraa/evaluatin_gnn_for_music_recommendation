@@ -48,11 +48,7 @@ The rebuilt union contains **1,309,344 tracks**, **1,199,540 artists**, **18,829
 
 Only **11,265 tracks** overlap between the catalog and observed playlists. Filtering discovery down to playlist membership discards much of the catalog. The new graph keeps those records and exposes missing audio/playlist information explicitly.
 
-### Why Elvana Gjata did not appear
-
-The source artist table contains Elvana Gjata (`6Cej574CUx7dHKuRHBPNp0`) with the genre `albanian pop`, but **neither source has a track credited to her**. There is no missing playlist join to repair for her own songs.
-
-Search **Elvana Gjata**, then choose **Use as inspiration**. Artist inspirations first select candidates through exact genre, sourced country, credited-artist or collaboration relationships. The chosen GNN then ranks that candidate set. This avoids false matches caused by compressed metadata features. The UI labels her profile as having no tracks in these datasets. No songs or playlist memberships are invented. To add her actual songs, the underlying catalog must be enriched with real track records.
+Artist inspirations select candidates through exact genre, sourced country, credited-artist or collaboration relationships. The chosen GNN then ranks that candidate set. Artists without credited tracks remain searchable as profiles when their metadata is available. No songs or playlist memberships are invented.
 
 Country is absent from the supplied artist data. To add it, provide `data/raw/artist_countries.csv` with one sourced row per artist:
 
@@ -71,8 +67,10 @@ Then rerun notebook 02 onward. Country is never inferred from artist names or ge
 | `01b_playlist_preprocessing` | Read-only SQLite audit, edge deduplication, orphan removal, duration repair, recomputed sizes |
 | `02_joining_and_segmentation` | Full track/artist union, graph relationships, deterministic split and sparse feature propagation |
 | `02b_data_analysis` | Coverage, audio correlations, playlist sizes, genre and degree distributions |
-| `02c_further_data_analysis` | Elvana audit, missing playlist history, endpoint/split/feature integrity |
+| `02c_further_data_analysis` | Catalog audio correlations, playlist-degree relationships, artist-credit paths and graph integrity |
 | `03_model_creation` | Three training runs, validation selection, held-out evaluation, checkpoint export and artist-seed demos |
+
+The further analysis finds positive catalog correlations between energy and loudness (Pearson r = 0.765) and danceability and valence (r = 0.528), and a negative correlation between energy and acousticness (r = -0.715). Among the 11,265 catalog tracks observed in playlists, log playlist degree relates more to catalog popularity (r = 0.359) than to any individual audio feature (largest absolute audio r = 0.106). These are descriptive associations; the connected subset is not representative of the whole catalog. Artist credits provide additional graph paths, including 107,357 tracks with multiple credits. Tables and pairwise sample counts are saved in `reports/current/`.
 
 The notebook code calls reusable modules in `scripts/`. Original Spark notebooks are preserved in `notebooks/legacy/` with their old outputs cleared. Old files directly under `reports/` and the old `lightgcn_model_card.json` are historical; **current results live in `reports/current/` and `models/manifest.json`**.
 
@@ -112,7 +110,8 @@ The fit percentage is a validation-calibrated relative score, not the probabilit
 - `models/*content_features.npy`: shared metadata features.
 - `models/artist_metadata_index.npz`, `models/track_artist_index.npz`, `models/metadata_tokens.json`: exact artist discovery evidence.
 - `data/processed/portable/`: cleaned tables, train-only graph, split, feature scaling and propagation arrays.
-- `reports/current/`: machine/data audits, execution status, figures, training histories, evaluation and Elvana demos.
+- `reports/current/`: machine/data audits, correlation tables, execution status, figures, training histories and evaluation.
+- `reports/current/model_analysis_figures/`: three dissertation-ready PNG/SVG comparisons of architectures, training/validation and held-out results versus CPU cost, with draft captions in `figure_captions.md`. Regenerate from saved results with `& $MusicPython scripts/create_model_figures.py`.
 
 Rebuild notebook 02 and all three models together whenever sources or feature construction change. Bundles are checked against the shared manifest generation; legacy checkpoints are rejected.
 
