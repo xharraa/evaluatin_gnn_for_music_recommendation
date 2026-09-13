@@ -1,0 +1,12 @@
+# CLI uploads from the repository root, matching Vercel's web root directory.
+*
+!web
+!web/**
+web/node_modules/**
+web/.next/**
+web/.vercel/**
+web/.env*
+web/*.tsbuildinfo
+web/Dockerfile
+web/.dockerignore
+web/AGENTS.md

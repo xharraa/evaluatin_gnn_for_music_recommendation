@@ -2,7 +2,7 @@
 
 ## Current public demo: Vercel + Docker on this laptop
 
-The frontend is deployed at **https://playlist-lab-ruddy.vercel.app** in the Vercel Hobby project `xharra/playlist-lab`. Share this address, not localhost or the temporary backend address. Deployment is from the local `web/` folder using Vercel CLI; GitHub is not connected and a Git commit is not required to update this deployment.
+The frontend is deployed at **https://playlist-lab-ruddy.vercel.app** in the Vercel Hobby project `xharra/playlist-lab`. Share this address, not localhost or the temporary backend address. GitHub is connected to `xharraa/evaluatin_gnn_for_music_recommendation`, with production branch `main` and Root Directory `web`. These settings were verified through the Vercel API. Pushes to `main` can deploy automatically. Manual CLI deployments now run from the repository root; the root `.vercelignore` restricts uploads to frontend files.
 
 Vercel's server-side `RECOMMENDER_API_URL` points to a Cloudflare Quick Tunnel into the Docker API. The three trained models and catalog files stay in the local `models/` folder, mounted read-only. Only the API's health, search and recommendation endpoints are served by that backend; model files are not downloadable through it. The Vercel upload contains the frontend source, not the model bundle.
 
@@ -16,6 +16,11 @@ Open Docker Desktop and wait for the engine to run. From the project folder, run
 powershell -ExecutionPolicy Bypass -File scripts/start_vercel_demo.ps1
 ```
 
+the path is: 
+
+```powershell
+cd C:\Users\artix\Documents\evaluatin_gnn_for_music_recommendation
+```
 The script starts the API, local web server and tunnel, reads the current tunnel URL, checks all three models, updates the Vercel production environment variable, and deploys the current frontend source. It reuses the existing Vercel project, so the public frontend address stays the same. It requires this laptop's project-local Node/Vercel tools and the Vercel CLI login established during setup. If sign-in expires, run `.tools/node-v22.23.2-win-x64/node.exe .tools/vercel-cli/node_modules/vercel/dist/vc.js login` from the project folder and approve Vercel's device login, then rerun the script.
 
 For a read-only API connection check without deploying:
@@ -40,7 +45,25 @@ docker compose -f compose.yaml -f compose.tunnel.yaml stop tunnel
 - Made Next.js standalone output conditional: enabled for Docker, disabled for Vercel. This resolved the observed Next.js 16.3/Vercel adapter build failure ([upstream issue](https://github.com/vercel/next.js/issues/96646)).
 - The local production build and ESLint passed. The corrected Vercel production build completed successfully. Unauthenticated requests to the public homepage, health and search succeeded; LightGCN, SIGN and Residual SIGN each returned three recommendations through the Vercel URL. The restart script's `-CheckOnly` path also passed against the running tunnel.
 
-If you connect GitHub later, set Vercel's **Root Directory to `web`** before enabling automatic deployments. Commit/push the source and deployment files; keep the ignored model files, `.env*`, `.vercel/`, `.tools/` and generated transfer bundle out of Git. GitHub connection alone does not host the models or remove the laptop dependency.
+Vercel's **Root Directory is `web`** and its production branch is `main`. Commit/push the source and deployment files; keep the ignored model files, `.env*`, `.vercel/`, `.tools/` and generated transfer bundle out of Git. GitHub connection alone does not host the models or remove the laptop dependency. After switching the project root from the frontend folder to the repository root, the restart script and CLI upload exclusions were updated to match.
+
+The container restart test changed the Quick Tunnel URL and caused public API requests to return 503 even though Docker health checks were green. Running the reconnection script updates Vercel to the current URL and redeploys the frontend. Starting containers alone does not update Vercel's environment variable.
+
+### Moving the model backend to an online server
+
+A suitable low-cost option is an x86 Linux VPS with 8 GB RAM and at least 30 GB disk. The backend previously used about 2.3 GiB in Docker, so extra memory gives room for catalog loading and model switches. A GPU is not needed for this CPU inference setup.
+
+For example, Hetzner's CX33 has a published European price of EUR 8.49/month before VAT and IPv4 charges as of the 13 September 2026 check ([pricing](https://docs.hetzner.com/general/infrastructure-and-availability/price-adjustment/)); confirm availability, the selected machine's RAM, and the checkout total. A managed alternative is Railway, which charges for resource use including RAM at USD 10 per GB-month ([pricing](https://docs.railway.com/pricing/plans)); the backend's memory use makes it more expensive than the cheapest VPS tier when continuously running.
+
+Migration steps:
+
+1. Create the hosting account and approve a server plan; an Ubuntu x86 machine with Docker and 8 GB RAM is appropriate.
+2. Transfer the API source and the required private model/catalog files to that server over SSH/SFTP. Git alone does not contain the ignored model artifacts.
+3. Build and start the Docker API with the server's models folder mounted read-only. Configure a stable HTTPS endpoint using a backend hostname and reverse proxy, or the hosting provider's managed HTTPS address.
+4. Update Vercel's production `RECOMMENDER_API_URL` to that endpoint and redeploy.
+5. Test search and all three models through the existing Vercel URL with the laptop's tunnel stopped. Only after that test does the public app no longer depend on this laptop.
+
+The frontend keeps its free `vercel.app` address. A server, provider login, and billing choice have not yet been provisioned or approved for this migration.
 
 For an always-online service independent of this laptop, move the Docker API/models to a server and change `RECOMMENDER_API_URL` to its HTTPS endpoint, then redeploy Vercel. The existing free Vercel frontend address can be kept. The following alternative hosts both services together on a VPS and uses a separately owned domain.
 

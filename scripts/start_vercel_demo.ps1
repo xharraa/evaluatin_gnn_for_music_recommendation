@@ -13,7 +13,7 @@ $ComposeArgs = @('compose', '-f', 'compose.yaml', '-f', 'compose.tunnel.yaml')
 
 if (-not (Test-Path -LiteralPath $DockerExe)) { throw 'Docker CLI not found. Open Docker Desktop first.' }
 if (-not $CheckOnly) {
-    foreach ($Path in @($NodeExe, $VercelCli, (Join-Path $ProjectRoot 'web/.vercel/project.json'))) {
+    foreach ($Path in @($NodeExe, $VercelCli, (Join-Path $ProjectRoot '.vercel/project.json'))) {
         if (-not (Test-Path -LiteralPath $Path)) { throw "Required deployment tool or Vercel project link missing: $Path" }
     }
 }
@@ -45,7 +45,8 @@ try {
     Write-Host "Public API ready: $ApiUrl"
     if ($CheckOnly) { return }
 
-    Push-Location (Join-Path $ProjectRoot 'web')
+    # Upload from the repository root; Vercel's configured root is web/.
+    Push-Location $ProjectRoot
     try {
         $PreviousPath = $env:PATH
         $env:PATH = (Split-Path -Parent $NodeExe) + ';' + $env:PATH
