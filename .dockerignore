@@ -1,0 +1,15 @@
+.git
+.venv
+.tools
+.pytest_cache
+.vscode
+__pycache__
+*.pyc
+data
+models
+notebooks
+reports
+tests
+web
+deployment-bundle
+*.md

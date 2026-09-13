@@ -2,6 +2,8 @@
 
 A local playlist builder backed by LightGCN, SIGN and Residual SIGN. Search tracks or artists, add/remove songs, choose artist inspirations, and switch models without losing your playlist.
 
+The public demo is [Playlist Lab](https://playlist-lab-ruddy.vercel.app). Vercel hosts the interface; the three models run in Docker on this laptop through a temporary tunnel, so recommendations require the laptop to stay awake and online. After restarting Docker or Windows, run `powershell -ExecutionPolicy Bypass -File scripts/start_vercel_demo.ps1` from this folder to reconnect and redeploy. See the [deployment guide](docs/DEPLOYMENT.md) for the Vercel setup, restart/stop commands, private model files, and an always-online VPS alternative. GitHub is not required for the current deployment.
+
 ## Run on this laptop
 
 From the repository root in PowerShell:

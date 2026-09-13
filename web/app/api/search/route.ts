@@ -10,12 +10,15 @@ export async function GET(request: NextRequest) {
   target.searchParams.set("limit", limit);
 
   try {
-    const response = await fetch(target, { cache: "no-store" });
+    const response = await fetch(target, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(20000),
+    });
     const data = await response.json();
     return NextResponse.json(data, { status: response.status });
   } catch {
     return NextResponse.json(
-      { error: "The local recommendation service is not running." },
+      { error: "The recommendation service is currently unavailable. Please try again shortly." },
       { status: 503 },
     );
   }

@@ -38,3 +38,7 @@ reports/current/*.log
 models/*.parquet
 models/*.npz
 reports/current/demo_processes.json
+
+# Server-specific settings and generated upload bundles
+.env
+deployment-bundle/

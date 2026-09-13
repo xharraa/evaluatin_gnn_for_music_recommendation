@@ -1,0 +1,10 @@
+# Temporary public API for a Vercel frontend. The URL changes on restart.
+# Only the inference API is exposed; model files are not served over HTTP.
+services:
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate --url http://api:8000
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: "no"

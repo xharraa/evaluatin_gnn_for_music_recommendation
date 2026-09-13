@@ -1,0 +1,7 @@
+# Runtime-only dependencies. Training and notebook packages stay out of the image.
+numpy==2.5.3
+pandas==2.3.3
+scipy==1.18.1
+pyarrow==25.0.1
+torch==2.13.0+cpu
+
