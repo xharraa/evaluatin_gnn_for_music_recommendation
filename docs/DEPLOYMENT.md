@@ -21,7 +21,7 @@ the path is:
 ```powershell
 cd C:\Users\artix\Documents\evaluatin_gnn_for_music_recommendation
 ```
-The script starts the API, local web server and tunnel, reads the current tunnel URL, checks all three models, updates the Vercel production environment variable, and deploys the current frontend source. It reuses the existing Vercel project, so the public frontend address stays the same. It requires this laptop's project-local Node/Vercel tools and the Vercel CLI login established during setup. If sign-in expires, run `.tools/node-v22.23.2-win-x64/node.exe .tools/vercel-cli/node_modules/vercel/dist/vc.js login` from the project folder and approve Vercel's device login, then rerun the script.
+The script starts the API and local web server, then always recreates the temporary tunnel. This is deliberate: a Cloudflare Quick Tunnel can expire while its old Docker container still shows as `Running`. The script reads the new URL, retries its public health check, verifies all three models, updates Vercel's production environment variable, and deploys the current frontend source. It reuses the existing Vercel project, so the public frontend address stays the same. It requires this laptop's project-local Node/Vercel tools and the Vercel CLI login established during setup. If sign-in expires, run `.tools/node-v22.23.2-win-x64/node.exe .tools/vercel-cli/node_modules/vercel/dist/vc.js login` from the project folder and approve Vercel's device login, then rerun the script.
 
 For a read-only API connection check without deploying:
 
@@ -48,6 +48,10 @@ docker compose -f compose.yaml -f compose.tunnel.yaml stop tunnel
 Vercel's **Root Directory is `web`** and its production branch is `main`. Commit/push the source and deployment files; keep the ignored model files, `.env*`, `.vercel/`, `.tools/` and generated transfer bundle out of Git. GitHub connection alone does not host the models or remove the laptop dependency. After switching the project root from the frontend folder to the repository root, the restart script and CLI upload exclusions were updated to match.
 
 The container restart test changed the Quick Tunnel URL and caused public API requests to return 503 even though Docker health checks were green. Running the reconnection script updates Vercel to the current URL and redeploys the frontend. Starting containers alone does not update Vercel's environment variable.
+
+### Tunnel recovery update (14 September 2026)
+
+The prior Quick Tunnel expired and Cloudflare logged `Unauthorized: Tunnel not found`, despite the tunnel container retaining a `Running` state. This caused the startup script to select an expired `trycloudflare.com` address and fail DNS resolution at its public health check. `scripts/start_vercel_demo.ps1` now force-recreates only the tunnel container on each normal run and retries the new public health endpoint before it updates Vercel. The local API and web containers are not rebuilt or retrained by this recovery step. The new Vercel production deployment was verified through public health, search, and recommendation requests after the fix.
 
 ### Moving the model backend to an online server
 

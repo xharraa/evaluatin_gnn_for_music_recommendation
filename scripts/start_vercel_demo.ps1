@@ -21,8 +21,13 @@ if (-not $CheckOnly) {
 Push-Location $ProjectRoot
 try {
     if (-not $CheckOnly) {
-        & $DockerExe @ComposeArgs up -d api web tunnel
+        # Quick Tunnel URLs can expire even while their old container still has a
+        # running state. Start the local services, then always create a fresh
+        # tunnel so logs and Vercel never reuse an expired trycloudflare URL.
+        & $DockerExe @ComposeArgs up -d api web
         if ($LASTEXITCODE -ne 0) { throw 'Docker startup failed. Check Docker Desktop and try again.' }
+        & $DockerExe @ComposeArgs up -d --force-recreate tunnel
+        if ($LASTEXITCODE -ne 0) { throw 'Cloudflare tunnel startup failed. Check Docker Desktop and try again.' }
     }
     $TunnelId = & $DockerExe @ComposeArgs ps -q tunnel
     if ($LASTEXITCODE -ne 0 -or -not $TunnelId) { throw 'The public tunnel is not running.' }
@@ -37,9 +42,23 @@ try {
         Start-Sleep -Seconds 2
     }
     if (-not $ApiUrl) { throw 'No public API URL appeared. Check the tunnel logs.' }
-    $Health = Invoke-RestMethod "$ApiUrl/health" -TimeoutSec 30
+    $Health = $null
+    $LastHealthError = $null
+    for ($Attempt = 0; $Attempt -lt 15; $Attempt++) {
+        try {
+            $Health = Invoke-RestMethod "$ApiUrl/health" -TimeoutSec 15
+            if ($Health.status -eq 'ready') { break }
+        } catch {
+            $LastHealthError = $_.Exception.Message
+        }
+        Start-Sleep -Seconds 2
+    }
+    if (-not $Health -or $Health.status -ne 'ready') {
+        $Reason = if ($LastHealthError) { " Last error: $LastHealthError" } else { '' }
+        throw "The new public API URL did not become ready.$Reason"
+    }
     $ModelIds = @($Health.models.id)
-    if ($Health.status -ne 'ready' -or @('lightgcn', 'sign', 'residual_sign' | Where-Object { $_ -notin $ModelIds }).Count) {
+    if (@('lightgcn', 'sign', 'residual_sign' | Where-Object { $_ -notin $ModelIds }).Count) {
         throw 'The public API did not report all three models ready.'
     }
     Write-Host "Public API ready: $ApiUrl"

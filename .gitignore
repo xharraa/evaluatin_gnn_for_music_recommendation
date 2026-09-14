@@ -47,3 +47,17 @@ deployment-bundle/
 
 .vercel
 .env*
+
+# LaTeX build artefacts (the .tex, .bib and figure sources remain tracked)
+dissertation/*.aux
+dissertation/*.bbl
+dissertation/*.blg
+dissertation/*.fdb_latexmk
+dissertation/*.fls
+dissertation/*.lof
+dissertation/*.log
+dissertation/*.lot
+dissertation/*.out
+dissertation/*.synctex.gz
+dissertation/*.toc
+dissertation/*
